@@ -6,8 +6,8 @@ export class AppRoutes {
   static get routes(): Router {
     const router = Router();
     
-    router.use('/api/auth', AuthRouter.routes);
-    router.use('/api/pokemon', PokemonRouter.routes);
+    router.use('/auth', AuthRouter.routes);
+    router.use('/pokemon', PokemonRouter.routes);
 
     return router;
   }
