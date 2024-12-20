@@ -1,4 +1,3 @@
-import { UUID } from '../../config';
 import { Pokemon, PokemonRepository } from '../../domain';
 import { CreatePokemonDTO, UpdatePokemonDTO } from '../../presentation/dto';
 import { CustomError } from '../error';
@@ -11,12 +10,15 @@ export class PokemonServiceImpl implements PokemonService {
   ) {}
 
   async createPokemon(createPokemonDTO: CreatePokemonDTO): Promise<Pokemon> {
+    const existsPokemon = await this.pokemonRepository.showPokemonByNumber(createPokemonDTO.num);
+    if(existsPokemon) {
+      throw CustomError.badRequest('Num of pokemon taken');
+    }
+
     try {
-      const pokemon: Pokemon = {
+      const pokemon = {
         ...createPokemonDTO,
-        id: UUID.getDefaultUUID(),
-        createdAt: new Date(),
-      };
+      } as Pokemon;
 
       return await this.pokemonRepository.createPokemon(pokemon);
     } catch(error) {

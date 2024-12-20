@@ -1,10 +1,11 @@
+import { UUID } from '../../../config';
 import { Pokemon } from '../../model';
 import { PokemonRepository } from '../interface/pokemon.repository';
 
 export class PokemonRepositoryImpl implements PokemonRepository {
 
   private pokemons: Pokemon[];
-  static instance?: PokemonRepository;
+  private static instance?: PokemonRepository;
 
   private constructor() {
     this.pokemons = [];
@@ -19,8 +20,13 @@ export class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   async createPokemon(pokemon: Pokemon): Promise<Pokemon> {
-    this.pokemons.push(pokemon);
-    return pokemon;
+    const newPokemon: Pokemon = {
+      ...pokemon,    
+      id: UUID.getDefaultUUID(),
+      createdAt: new Date(),
+    };
+    this.pokemons.push(newPokemon);
+    return newPokemon;
   }
 
   async getPokemons(): Promise<Pokemon[]> {

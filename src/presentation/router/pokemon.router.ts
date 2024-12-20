@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import { AuthMiddleware } from '../middlewares/auth.middleware';
-import { PokemonRepository, PokemonRepositoryImpl } from '../../domain';
+import { PokemonFactory, PokemonRepository } from '../../domain';
 import { PokemonService, PokemonServiceImpl } from '../../service';
 import { PokemonController } from '../controller/pokemon.controller';
+import { envs } from '../../config';
 
 export class PokemonRouter {
   static get routes(): Router {
     const router = Router();
   
-    const repository: PokemonRepository = PokemonRepositoryImpl.getInstance();
+    const repository: PokemonRepository = PokemonFactory.getPokemonRepository(envs.DATABASE_ENVIRONMENT);
     const service: PokemonService = new PokemonServiceImpl(repository);
     const controller: PokemonController = new PokemonController(service);
   

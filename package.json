@@ -28,6 +28,7 @@
     "env-var": "^7.4.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.1",
     "uuid": "^9.0.1"
   }
 }

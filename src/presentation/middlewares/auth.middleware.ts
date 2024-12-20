@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { JwtAdapter } from '../../config';
-import { User, UserRepository, UserRepositoryImpl } from '../../domain';
+import { envs, JwtAdapter } from '../../config';
+import { User, UserFactory, UserRepository } from '../../domain';
 
 export class AuthMiddleware {
   static async validateJsonWebToken(req: Request, res: Response, next: NextFunction) {
@@ -16,7 +16,7 @@ export class AuthMiddleware {
     const token = authorization.split(' ').at(-1) || '';
 
     try {
-      const repository: UserRepository = UserRepositoryImpl.getInstance();
+      const repository: UserRepository = UserFactory.getUserRepository(envs.DATABASE_ENVIRONMENT);
       const payload = await JwtAdapter.validateJsonWebToken<{ id: string }>(token);
 
       if(!payload) {

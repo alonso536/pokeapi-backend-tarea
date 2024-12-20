@@ -19,12 +19,10 @@ export class AuthServiceImpl implements AuthService {
     }
 
     try {
-      const user: User = {
-        id: UUID.getDefaultUUID(),
+      const user = {
         username: registerUserDTO.username,
         password: bcryptAdapter.hash(registerUserDTO.password),
-        role: 'ROLE_USER',
-      }
+      } as User;
 
       return await this.userRepository.createUser(user);
     } catch(error) {
