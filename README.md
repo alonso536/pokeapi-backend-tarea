@@ -45,7 +45,7 @@
 2. **Pokémon**:
    - GET `/pokemon` - Listar todos los Pokémon
    - GET `/pokemon/:id` - Ver detalle de un Pokémon: Funciona con el id y el num del pokemon
-   - GET `/pokemon/trainer/mypokemons` - Ver mis Pokémon (autenticado)
+   - GET `/pokemon/trainer/mypokemons` - Ver mis Pokemon (autenticado)
    - POST `/pokemon` - Crear nuevo Pokémon (autenticado)
    - PUT `/pokemon/:id` - Actualizar Pokémon (autenticado): Solo funciona con el id del pokemon
    - DELETE `/pokemon/:id` - Eliminar Pokémon (autenticado): Solo funciona con el id del pokemon
