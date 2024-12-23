@@ -23,6 +23,7 @@ export class UserRepositoryMongo implements UserRepository {
     return { 
       id: newUser._id.toString(),
       username: newUser.username,
+      password: newUser.password,
       role: newUser.role,
     } as User;
   }

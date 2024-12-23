@@ -8,6 +8,7 @@ export const envs = {
   MONGO_DB_NAME: get('MONGO_DB_NAME').required().asString(),
   MONGO_USER: get('MONGO_USER').required().asString(),
   MONGO_PASSWORD: get('MONGO_PASSWORD').required().asString(),
+  DATABASE_URL: get('DATABASE_URL').required().asString(),
   DATABASE_ENVIRONMENT: get('DATABASE_ENVIRONMENT').required().asString(),
 };
 

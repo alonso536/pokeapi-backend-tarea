@@ -1,11 +1,15 @@
+import { PrismaClient } from '@prisma/client';
 import { User } from '../../model';
 import { UserRepository } from '../interface';
 
 export class UserRepositoryPostgres implements UserRepository {
 
   private static instance?: UserRepositoryPostgres;
+  private prisma: PrismaClient;
 
-  private constructor() {}
+  private constructor() {
+    this.prisma = new PrismaClient();
+  }
 
   static getInstance(): UserRepositoryPostgres {
     if(!this.instance) {
@@ -15,13 +19,20 @@ export class UserRepositoryPostgres implements UserRepository {
     return this.instance;
   }
 
-  createUser(user: User): Promise<User> {
-    throw new Error('Method not implemented.');
+  async createUser(user: User): Promise<User> {
+    return await this.prisma.users.create({ data: { ...user, role: 'ROLE_USER' } });
   }
-  getUsers(): Promise<User[]> {
-    throw new Error('Method not implemented.');
+
+  async getUsers(): Promise<User[]> {
+    return await this.prisma.users.findMany({});
   }
-  getUser(id: string): Promise<User | undefined> {
-    throw new Error('Method not implemented.');
+
+  async getUser(id: string): Promise<User | undefined> {
+    const user = await this.prisma.users.findFirst({ where: { id } });
+    if(!user) {
+      return undefined;
+    }
+
+    return user;
   }
 }

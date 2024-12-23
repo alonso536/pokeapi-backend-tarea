@@ -10,10 +10,15 @@
 
 ## Instrucciones
 
-1. Clonar .env.template a .env y configurar las variables de entorno, se puede ingresar cualquier puerto disponible
-y cualquier secret key para el JWT
-2. Ejecutar `npm install` para instalar las dependencias
-3. Ejecutar `npm run dev` para levantar el proyecto en modo desarrollo
+1. Clonar `.env.template` a `.env` y configurar las variables de entorno, se puede ingresar cualquier puerto disponible
+   y cualquier secret key para el JWT
+2. La variable de entorno `DATABASE ENVIRONMENT` puede contener los valores `mongo` o `postgres`, cualquier otro valor levantará el ambiente con datos en memoria
+3. Ejecutar `npm install` para instalar las dependencias
+4. Ejecutar `npx prisma init` para crear el archivo `schema.prisma` (Solo si desea probar el ambiente de postgres)
+5. Asegurarse de que la variable de entorno `DATABASE_URL` sea la correcta (Solo si desea probar el ambiente de postgres)
+6. Ejecutar `npx prisma db pull` para crear los modelos de prisma (Solo si desea probar el ambiente de postgres)
+7. Ejecutar `npx prisma genarate` para crear el cliente de prisma (Solo si desea probar el ambiente de postgres)
+8. Ejecutar `npm run dev` para levantar el proyecto en modo desarrollo
 
 ## Tecnologías
 
@@ -23,13 +28,18 @@ y cualquier secret key para el JWT
 - Bycrypt
 - UUID
 - Json Web Token
+- Mongo DB
+- Mongoose
+- Postgresql
+- Prisma ORM
 
 ## Endpoints
 
 - Se utilizó la libreria UUID para los identificadores primarios y se agregó un campo num para guardar el
-número del pokemon
+  número del pokemon
 
 1. **Autenticación**:
+
    - POST `/auth/register` - Registro de nuevo entrenador
    - POST `/auth/login` - Login de entrenador
 
